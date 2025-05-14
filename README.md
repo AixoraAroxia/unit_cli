@@ -126,4 +126,7 @@ unit [command]
 * Interactive test configuration
 * IDE plugins for IntelliJ and Eclipse
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
