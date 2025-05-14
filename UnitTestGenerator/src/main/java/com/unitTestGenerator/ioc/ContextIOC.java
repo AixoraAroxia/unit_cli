@@ -91,13 +91,13 @@ import org.reflections.Reflections;
 
         private Object createInstance(Class<?> clazz) {
             try {
-                // Obtener constructor
+
                 Constructor<?> constructor = getConstructorWithDependencies(clazz);
-                // Resolver los parámetros del constructor
+
                 Object[] parameters = resolveConstructorParameters(constructor);
-                // Crear instancia
+
                 Object instance = constructor.newInstance(parameters);
-                // Inyectar dependencias en campos
+
                 injectDependencies(instance);
 
                 return instance;
@@ -154,7 +154,7 @@ import org.reflections.Reflections;
         }
 
 
-        private final Set<String> instancesInProgress = new HashSet<>(); // Para evitar ciclos
+        private final Set<String> instancesInProgress = new HashSet<>();
 
         private Object[] resolveConstructorParameters(Constructor<?> constructor) {
             Parameter[] parameters = constructor.getParameters();
@@ -164,7 +164,6 @@ import org.reflections.Reflections;
                 Class<?> paramType = parameters[i].getType();
                 String paramName = paramType.getSimpleName().toLowerCase();
 
-                // 🔥 Manejo de List<T>
                 if (List.class.isAssignableFrom(paramType)) {
                     Type genericType = parameters[i].getParameterizedType();
                     if (!(genericType instanceof ParameterizedType)) {
@@ -178,14 +177,14 @@ import org.reflections.Reflections;
 
                     Class<?> listElementType = (Class<?>) actualType;
 
-                    // Buscar todas las instancias del tipo genérico (Evita llamadas infinitas)
+
                     List<Object> list = registeredClasses.values().stream()
                             .filter(clazz -> listElementType.isAssignableFrom(clazz))
                             .map(clazz -> {
                                 try {
                                     return createInstance(clazz);
                                 } catch (Exception e) {
-                                    return null; // Si falla, devuelve null en vez de fallar todo
+                                    return null;
                                 }
                             })
                             .filter(Objects::nonNull)
@@ -193,9 +192,9 @@ import org.reflections.Reflections;
 
                     resolvedParameters[i] = list;
                 }
-                // 🔥 Manejo de String y Tipos Primitivos
+
                 else if (paramType.equals(String.class)) {
-                    resolvedParameters[i] = ""; // Valor por defecto para String
+                    resolvedParameters[i] = "";
                 } else if (paramType.equals(int.class) || paramType.equals(Integer.class)) {
                     resolvedParameters[i] = 0;
                 } else if (paramType.equals(boolean.class) || paramType.equals(Boolean.class)) {
@@ -205,16 +204,16 @@ import org.reflections.Reflections;
                 } else if (paramType.equals(float.class) || paramType.equals(Float.class)) {
                     resolvedParameters[i] = 0.0f;
                 } else {
-                    // Evitar ciclo de dependencias
+
                     if (instancesInProgress.contains(paramName)) {
                         throw new RuntimeException("Dependency cycle detected while creating: " + paramName);
                     }
 
-                    instancesInProgress.add(paramName); // Marcar como "en progreso"
+                    instancesInProgress.add(paramName);
                     try {
                         resolvedParameters[i] = getClassInstance(paramName, paramType);
                     } finally {
-                        instancesInProgress.remove(paramName); // Remover después de crear
+                        instancesInProgress.remove(paramName);
                     }
                 }
             }
@@ -223,26 +222,21 @@ import org.reflections.Reflections;
 
 
 
-        // Get an instance from the container
-        public <T> T getClassInstance(String name, Class<T> type) {
-//            System.out.println("🔍 Searching for instance: " + name);
-//            System.out.println("📌 Available instances: " + registeredClasses.keySet());
 
-            // Check if it is a Singleton
+        public <T> T getClassInstance(String name, Class<T> type) {
+
             if (singletonInstances.containsKey(name)) {
                 return type.cast(singletonInstances.get(name));
             }
-            // Check if the class is registered
             if (registeredClasses.containsKey(name)) {
                 Class<?> clazz = registeredClasses.get(name);
-                // Create a new instance for Prototype
                 Object instance = createInstance(clazz);
                 return type.cast(instance);
             }
             throw new RuntimeException("Instance with name " + name + " not found");
         }
 
-        // Get an instance of a registered class
+
         public <T> T getClassInstance(Class<T> type) {
             return getClassInstance(type.getSimpleName().toLowerCase(), type);
         }
@@ -255,18 +249,14 @@ import org.reflections.Reflections;
                     ClassName classNameAnnotation = clazz.getAnnotation(ClassName.class);
                     String className = classNameAnnotation.value();
                     Class<?> dynamicClass = Class.forName(className);
-                    // Instanciar la clase dinámicamente y llamar a un método
                     Object instance = dynamicClass.getDeclaredConstructor().newInstance();
-                    // Obtener el método saludo() de la clase Cliente (o cualquier clase)
                     Method saludoMethod = dynamicClass.getMethod(name);
 
                     if (saludoMethod == null) {
-                        System.out.println("Método no encontrado: " + name);
+
                     } else {
                         saludoMethod.invoke(instance);
                     }
-                    // Invocar el método saludo() en la instancia creada
-
 
                 } else {
                     System.out.println("Class does not have the ClassName annotation.");

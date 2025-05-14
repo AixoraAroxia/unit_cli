@@ -61,7 +61,6 @@ public interface IClassObject {
         variablesList.add("");
         content.append(cClass.getNombre()).append(".builder()").append("\n");
 
-//        for (Variable variable : cClass.getVariables()) {
         cClass.getVariables().forEach(variable -> {
             String variableName = variable.getNombre();
 

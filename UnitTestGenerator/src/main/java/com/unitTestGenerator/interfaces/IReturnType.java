@@ -126,10 +126,4 @@ public interface IReturnType extends IValueExtractor{
     }
 
 }
-/*
-	Assertions.assertThat(resultado).isFalse();
-	Assertions.assertThat(resultado).isEqualTo(resultado);
-	Assertions.assertThat(resultado).isNotEqualTo(resultado);
-	Assertions.assertThat(resultado).isNotNull();
-	Assertions.assertThat(resultado).isNull();
-* */
+

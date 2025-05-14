@@ -277,16 +277,6 @@ public class Clase {
         return content;
     }
 
-//    public Variable getVariable(String type){
-//        Variable var = null;
-//        try {
-//            var = this.variables.stream().filter( variable -> variable.getTipo().equals(type)).findFirst().get();
-//        }catch (Exception e){
-//            e.printStackTrace();
-//            return var;
-//        }
-//        return var;
-//    }
 
     public Variable getVariable(String type) {
 
@@ -380,8 +370,5 @@ public class Clase {
                 ", classAnotations='" + classAnotations + '\'' +
                 ", classUml='" + classUml + '\'' +
                 '}';
-
-
-
     }
 }

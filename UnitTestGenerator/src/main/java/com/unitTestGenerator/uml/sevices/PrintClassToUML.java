@@ -110,7 +110,7 @@ public class PrintClassToUML implements IRepeatLogic {
         StringBuffer buffer = new StringBuffer();
         if (classs.getClassRelations() != null && classs.getClassRelations().check()) {
             if (classs.getClassRelations().getClassExtends() != null && !classs.getClassRelations().getClassExtends().isEmpty()) {
-//                buffer.append("\t").append("Extends: ").append(nombre).append("\n");
+
                 buffer.append("\t").append(" -").append(classs.getClassRelations().getClassExtends()).append("\n");
             }
         }
@@ -123,7 +123,7 @@ public class PrintClassToUML implements IRepeatLogic {
         if (classs.getClassRelations() != null && classs.getClassRelations().check()) {
 
             if (classs.getClassRelations().getDependencyInjectionIoC() != null && !classs.getClassRelations().getDependencyInjectionIoC().isEmpty()) {
-//                buffer.append("\t").append("Ioc: ").append(nombre).append("\n");
+
                 for (String ioc : classs.getClassRelations().getDependencyInjectionIoC()) {
                     buffer.append("\t").append(" -").append(ioc).append("\n");
                 }
@@ -136,7 +136,7 @@ public class PrintClassToUML implements IRepeatLogic {
         StringBuffer buffer = new StringBuffer();
 
             if (classs.getClassRelations().getStrongDependencyAssociation() != null && !classs.getClassRelations().getStrongDependencyAssociation().isEmpty()) {
-//                buffer.append("\t").append("Strong Association: ").append(nombre).append("\n");
+
                 for (String classAssociated : classs.getClassRelations().getStrongDependencyAssociation()) {
                     buffer.append("\t").append(" -").append(classAssociated).append("\n");
                 }
@@ -150,7 +150,7 @@ public class PrintClassToUML implements IRepeatLogic {
         if (classs.getClassRelations() != null && classs.getClassRelations().check()) {
             if (classs.getClassRelations().getIdentifieresRelatedClasses() != null && !classs.getClassRelations().getIdentifieresRelatedClasses().isEmpty()) {
                 for (String classAssociated : classs.getClassRelations().getIdentifieresRelatedClasses()) {
-//                    buffer.append("\t").append("Association static or patter Build: ").append(nombre).append("\n");
+
                     buffer.append("\t").append(" -").append(classAssociated).append("\n");
                 }
             }
@@ -431,28 +431,26 @@ public class PrintClassToUML implements IRepeatLogic {
         int maxLength = calcularAnchoMaximo();
         String border = "+" + repeat("-", maxLength + 2) + "+\n";
 
-        // Encabezado
         diagrama.append(border);
         diagrama.append(formatLine(nombre, maxLength));
         diagrama.append(border);
 
-        // Atributos
+
         for (Variable variable : atributos) {
             diagrama.append(formatLine("- " + variable.getTipo() + " " + variable.getNombre(), maxLength));
         }
         diagrama.append(border);
 
-        // Métodos
+
         for (Metodo metodo : metodos) {
             diagrama.append(formatLine("+ " + metodo.getMethodSignature(), maxLength));
         }
         diagrama.append(border);
 
-        // Relaciones
+
         if (relations != null) {
             diagrama.append("Relations:\n");
             diagrama.append(border);
-            //TODO: HAY QUE COLOCAR EL LISTADO DE LAS RELACIONES PERO
             diagrama.append("" + this.relations.toString() + "\n");
             diagrama.append(border);
         }

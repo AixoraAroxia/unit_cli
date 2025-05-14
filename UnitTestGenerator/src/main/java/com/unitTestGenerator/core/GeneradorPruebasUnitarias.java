@@ -63,7 +63,6 @@ public class GeneradorPruebasUnitarias implements IManageMavenGadleAppProperties
         if(clase.getUseMock()){
             classSingne.append("\n").append("@ExtendWith(MockitoExtension.class)").append("\n");
         }else{
-            //TODO VERIFICAR DE LAS A NOTACIONES ES MEJOR PARA TESTING EL REPOSITORIO
             classSingne.append("\n");
            if( clase.getNombre().contains("JpaRepository") || clase.getNombre().contains("Repository") || clase.getNombre().contains("CrudRepository")){
                classSingne.append("\n").append("@DataJpaTest").append("\n");
@@ -73,7 +72,6 @@ public class GeneradorPruebasUnitarias implements IManageMavenGadleAppProperties
 
                String mainClass = this.project.getMainClassName();
                classSingne.append("\t").append("@SpringBootTest(classes =").append(mainClass).append(".class)").append("\n");
-//               classSingne.append("\t").append("@SpringBootTest").append("\n");
                classSingne.append("\t").append("@ActiveProfiles(\"test\")").append("\n");
            }
         }

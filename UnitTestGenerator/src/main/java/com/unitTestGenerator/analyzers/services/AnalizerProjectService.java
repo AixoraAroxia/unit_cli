@@ -58,8 +58,6 @@ public class AnalizerProjectService implements IPrintService, IPorjectName,IPrin
             this.generateImportsMap(project);
             this.generateClassesDetail(project);
             project.setName(this.getArtifatOrFileName(pathProject));
-//            String projectToElement =  ContextIOC.getInstance().getClassInstance(PrintClassToUML.class).projectToElement(project);
-//            this.printProjectAnalize(project,isAnalisis);
         }
         return project;
     }

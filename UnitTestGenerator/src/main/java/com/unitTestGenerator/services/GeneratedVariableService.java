@@ -35,8 +35,7 @@ public class GeneratedVariableService implements IGenerateVariable {
         }
 
         if (!clase.getUseMock()) {
-                //TODO; ESTE METODO VA ANALISAR OTRAS CLASES PARA USAR EN LA GENERACION DE LAs variables de PRUEBA.
-                //  @Autowired
+
             }
             return content.toString();
         }

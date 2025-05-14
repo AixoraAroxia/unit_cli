@@ -240,24 +240,9 @@ public class AnalyzeClassServiceService implements IAnalyzeCassMethodService, IA
                         }
                     }
 
-                    // Add the method to the class
                     clase.addMetodo(metodo);
                 }
 
-
-
-
-//                while (matcherMetodoInterface.find()) {
-//                    Metodo metodo = ContextIOC.getInstance().getClassInstance(Metodo.class);
-//                    this.analyzeMethodBasic(metodo, matcherMetodoInterface);
-//                    this.analyzeMethodParameters(metodo, matcherMetodoInterface);
-//
-//                    String[] signturePart = matcherMetodoInterface.group(0).trim().split("\\{");
-//                    String va = signturePart[0];
-//                    metodo.setMethodSignature(va);
-//                    this.analyzeMethodAnotations(contenido, metodo, metodo.getMethodSignature());
-//                    clase.addMetodo(metodo);
-//                }
             }
 
         }

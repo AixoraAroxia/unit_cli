@@ -126,31 +126,28 @@ public class Project {
 
 
 
-//Complejidad: O(N + C) donde C = total de conexiones en todos los nodos.
+
     public  void fillUserForNodeList(){
 
-        Map<String, List<Clase>> nombreClaseMultimap = new HashMap<>(); // Mapa para manejar nombres duplicados
+        Map<String, List<Clase>> nombreClaseMultimap = new HashMap<>();
 
-// Paso 1: Construir el mapa de nombres -> lista de Clases (maneja duplicados)
         for (Clase clase : this.claseList) {
             nombreClaseMultimap
                     .computeIfAbsent(clase.getNombre(), k -> new ArrayList<>())
                     .add(clase);
         }
 
-// Paso 2: Procesar conexiones usando la clave única del Node
         for (Clase classs : this.claseList) {
             Node currentClassNode = classs.getClassNode();
             String currentClassName = currentClassNode.getClassName();
             List<String> currentClassNodeConnections = currentClassNode.getConextions();
 
             for (String connectedNombre : currentClassNodeConnections) {
-                // Condición equivalente a la original: evitar auto-referencias por className
                 if (!currentClassName.equals(connectedNombre)) {
                     List<Clase> connectedClases = nombreClaseMultimap.get(connectedNombre);
                     if (connectedClases != null) {
                         for (Clase connectedClass : connectedClases) {
-                            // Acceso directo usando la clave única del Node actual
+
                             this.nodeSources.get(currentClassNode.getName())
                                     .getUseFor()
                                     .add(connectedClass.getNombre());

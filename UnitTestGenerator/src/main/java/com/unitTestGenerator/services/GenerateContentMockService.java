@@ -34,7 +34,7 @@ public class GenerateContentMockService implements IMethodServiceTools, IGenerat
 
     public String generateContentMock(Metodo method, Clase clase, TestFileContent fileContent) {
         StringBuilder content = new StringBuilder("\n");
-        String classNameCamelCase = StringUtils.uncapitalize(clase.getNombre()); // Use StringUtils if available
+        String classNameCamelCase = StringUtils.uncapitalize(clase.getNombre());
         String parametersMethodTest = this.addStringParametes(method.getParametros());
         String testMethodCall = String.format("%s.%s(%s)", classNameCamelCase, method.getNombre(), parametersMethodTest);
 
@@ -83,7 +83,7 @@ public class GenerateContentMockService implements IMethodServiceTools, IGenerat
 
                 if (COMMON_METHODS.contains(methodName)) {
                     mockCalls.append("\t").append( this.mockitoWhen.generateCallMethodMock(instanceMethodCall.getOperation(), method, this.project, null, fileContent,methodName));
-                } else if (calledClass != null) { //Check if calledClass is not null
+                } else if (calledClass != null) {
                     Optional<Metodo> methodInClass = calledClass.getMetodos().stream()
                             .filter(m -> m.getNombre().equalsIgnoreCase(methodName))
                             .findFirst();
@@ -109,8 +109,8 @@ public class GenerateContentMockService implements IMethodServiceTools, IGenerat
                     String parametersParts = instanceMethodCall.getOperation().substring(instanceMethodCall.getOperation().indexOf('(') + 1, instanceMethodCall.getOperation().length() - 1);
                     List<ParametroMetodo> parametersList = instanceMethodCall.getParametros().isEmpty()
                             ? Arrays.stream(parametersParts.split(","))
-                            .filter(s -> !s.isEmpty()) // filter out empty strings
-                            .map(s -> ParametroMetodo.builder().nombre(s.trim()).build()) // trim white space
+                            .filter(s -> !s.isEmpty())
+                            .map(s -> ParametroMetodo.builder().nombre(s.trim()).build())
                             .collect(Collectors.toList())
                             : instanceMethodCall.getParametros();
                     return  this.mockitoWhen.verificarMock(instanceMethodCall.getVariableInstace(), instanceMethodCall.getMethod(), parametersList);

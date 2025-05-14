@@ -14,7 +14,7 @@ public interface MainMenue {
         buffer.append("3. Exit*").append("\n");
         String ANSI_YELLOW = "\u001B[33m";
         System.out.println(ANSI_YELLOW + buffer.toString());
-//        System.out.println(buffer.toString());
+
     }
 
     default boolean questionAboutUseMock(Scanner scanner) {

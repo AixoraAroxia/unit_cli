@@ -84,30 +84,6 @@ public class AnalizadorProyecto implements ITodoDetectorService, IPrintProjectSt
     }
 
 
-//    private  void analizarProyectoRecursivo2(File carpeta, List<Clase> classList, Map<String, Clase> mapClass, Project project) {
-//
-//        if (carpeta.isDirectory()) {
-//            String nombreCarpeta = carpeta.getName();
-//
-//            if (!Arrays.asList(IGNORAR).contains(nombreCarpeta)) {
-//                for (File archivo : carpeta.listFiles()) {
-//                    if (archivo.isDirectory()) {
-//                        this.analizarProyectoRecursivo(archivo, classList, mapClass, project);
-//                    } else {
-//                        if(archivo.getName().trim().endsWith(".java")) {
-//                            Clase clase = analyzeClassServiceService.analyzeClase(archivo);
-//                            if (clase != null) {
-//                                clase.setTodoNoteInClass(this.getTodo(clase.getRawClass()));
-//                                this.treeBuilder.addPath(clase.getClassPath());
-//                                this.importAnalizeService.importAnalize(clase);
-//                            }
-//                            this.setContainers(clase, classList, mapClass);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//    }
 
     private void setContainers(Clase clase, List<Clase> classList, Map<String, Clase> mapClass, Project project){
 

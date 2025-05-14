@@ -56,7 +56,6 @@ public class AppProjectStarted implements MainMenue, IAnalizerProjectServiceMana
             switch (opcion) {
                 case 1:
                     this.projectHolderLogic( scanner, true);
-//                    continuar = this.askContinue(scanner);
                         continuar = false;
                     break;
                 case 2:

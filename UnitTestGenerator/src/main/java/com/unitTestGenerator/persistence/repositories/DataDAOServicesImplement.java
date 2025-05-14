@@ -77,8 +77,6 @@ public class DataDAOServicesImplement implements IDaoService {
             tx.commit();
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Rolling back the changes to make the data consistent in case of any failure
-            // in between multiple database write operations.
             tx.rollback();
         } finally {
             if (session != null) {

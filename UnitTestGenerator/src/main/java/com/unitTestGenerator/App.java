@@ -10,11 +10,6 @@ public class App  {
 
     public static void main(String[] args) {
         ContextIOC.getInstance(App.class).getClassInstance(AppProjectStarted.class).start();
-//        if (args.length > 0) {
-//            System.out.println("Hola " + String.join(" ", args));
-//        } else {
-//            ContextIOC.getInstance(App.class).getClassInstance(AppProjectStarted.class).start();
-//        }
     }
 
 }

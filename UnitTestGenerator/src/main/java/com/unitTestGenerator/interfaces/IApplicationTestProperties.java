@@ -1,11 +1,7 @@
 package com.unitTestGenerator.interfaces;
 
-import com.unitTestGenerator.analyzers.PomAnalyzer;
-import com.unitTestGenerator.builders.interfaces.IFileManager;
-import com.unitTestGenerator.pojos.Clase;
-import com.unitTestGenerator.pojos.Project;
 
-import java.io.File;
+import com.unitTestGenerator.builders.interfaces.IFileManager;
 
 public interface IApplicationTestProperties extends IFileManager {
 

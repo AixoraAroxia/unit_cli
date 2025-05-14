@@ -107,7 +107,7 @@ public class AddPatterBuilder implements IFileManager {
 
     private String addBuilderStaticMethod( String builderClass){
         StringBuilder addBuilderStaticMethod = new StringBuilder();
-        // Agregar método estático builder()
+
         addBuilderStaticMethod.append("public static ")
                 .append(builderClass)
                 .append(" builder() {\n")

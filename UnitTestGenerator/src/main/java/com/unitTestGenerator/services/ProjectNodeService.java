@@ -27,31 +27,27 @@ public class ProjectNodeService {
     }
 
 
-    //Complexity: O(N + C) where C = total connections on all nodes.
      private Project fillUserForNodeList(Project project){
 
         Map<String, List<Clase>> nombreClaseMultimap = new HashMap<>();
 
-        // Step 1: Build the map of names -> list of Classes (handles duplicates),
         for (Clase clase : project.getClaseList()) {
             nombreClaseMultimap
                     .computeIfAbsent(clase.getNombre(), k -> new ArrayList<>())
                     .add(clase);
         }
 
-        // Step 2: Process connections using the unique key of the Node, // Condition equivalent to the original: avoid self-references by className,
         for (Clase classs : project.getClaseList()) {
             Node currentClassNode = classs.getClassNode();
             String currentClassName = currentClassNode.getClassName();
             List<String> currentClassNodeConnections = currentClassNode.getConextions();
 
             for (String connectedNombre : currentClassNodeConnections) {
-            // Condition equivalent to the original: avoid self-references by className
+
                 if (!currentClassName.equals(connectedNombre)) {
                     List<Clase> connectedClases = nombreClaseMultimap.get(connectedNombre);
                     if (connectedClases != null) {
                         for (Clase connectedClass : connectedClases) {
-                            // Direct access using the unique key of the current Node
                             project.getNodeSources().get(currentClassNode.getName())
                                     .getUseFor()
                                     .add(connectedClass.getNombre());
@@ -62,10 +58,6 @@ public class ProjectNodeService {
         }
         return project;
     }
-
-    //TODO: DEVELOP THE LOGIC FOR CONECT TO GRAFO VIEW FOR THAT YOU NEED:
-    // LIKE  Map<String, List<String>> grafo = new HashMap<>();
-    // EXAMPLE: grafo.put("A", new HashSet<>(Arrays.asList("B", "C")));
 
 
 }

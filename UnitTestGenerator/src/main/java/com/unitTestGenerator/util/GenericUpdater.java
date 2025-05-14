@@ -4,10 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Objects;
 
 public class GenericUpdater {
-    /*
-     * @param target is old value
-     * @param source is a new value
-     */
+
     public static <T> void update(T target, T source) {
         if (source != null && target != null) {
             Class<?> clazz = source.getClass();
